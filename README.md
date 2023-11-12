@@ -1,5 +1,5 @@
-A Spotify Developer account is required to set up the Express webserver. Create a Spotify account or log in at https://developer.spotify.com/dashboard/ and follow the instructions to create a client id. Name the app whatever you’d like.
-cd into webserver and client and run this command in both: npm install (for mac you may need to put sudo in front to run in admistitrator mode)
-cd into webserver and run this command to start it: npm start
-cd into into client and run this command to start it: ng serve --open
-create a token and client_secret key json in the webserver class that you will get from your spotify api
+- A Spotify Developer account is required to set up the Express webserver. Create a Spotify account or log in at https://developer.spotify.com/dashboard/ and follow the instructions to create a client id. Name the app whatever you’d like.
+- cd into webserver and client and run this command in both: npm install (for mac you may need to put sudo in front to run in admistitrator mode)
+- cd into webserver and run this command to start it: npm start
+- cd into into client and run this command to start it: ng serve --open
+- create a token and client_secret key json in the webserver class that you will get from your spotify api
