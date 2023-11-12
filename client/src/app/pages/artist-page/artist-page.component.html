@@ -1,0 +1,104 @@
+<div *ngIf="artist" class="row">
+	<div class="col-6">
+		<!--TODO: populate with artist name-->
+		<h1>{{artist.name}}</h1>
+		<!--TODO: populate with artist image URL-->
+		<img id="artistImg" [src]="artist.images[1].url">
+		<p>
+			<!--TODO: link to artist page on spotify, display artist name-->
+			<a class="btn btn-light" role="button" target="_blank" [href]="artist.external_urls.spotify">Open {{artist.name}} on Spotify</a>
+		</p>
+	</div>
+	<div class="col-2">
+		<h3>Genres</h3>
+		<ul>
+			<!--TODO: loop over artist's genres and display them-->
+			<li *ngFor="let genre of artist.genres">{{ genre }}</li>
+		</ul>
+		<p>
+		</p>
+	</div>
+	<div class="col-4">
+		<!--TODO: display artist name-->
+		<h3>{{artist.name}}'s Top Tracks</h3>
+		<!--TODO: display the artist's top tracks-->
+			<table class="table table-sm table-light table-striped" *ngIf="topTracks">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Track</th>
+						<th scope="col">Duration</th>
+						<th scope="col">Primary Artist</th>
+						<th scope="col">Album</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let track of topTracks.tracks; let i = index">
+						<td>{{i + 1}}</td>
+						<td>
+							<a [routerLink]="'/track/' + track.id" target="">{{ track.name }}</a>
+						</td>
+						<td>{{durationStr(track.duration_ms)}}</td>
+						<td >
+							<a [routerLink]="'/artist/' + track.artists[0].id" target="">{{ track.artists[0].name }}</a>
+						</td>
+						<a [routerLink]="'/album/' + track.album.id" target="">{{ track.album.name }}</a>
+					</tr>
+				</tbody>
+			</table>
+	</div>
+</div>
+
+<div *ngIf="artist" class="row">
+	<div class="col-6">
+		<!--TODO: display artist name-->
+		<h3>{{artist.name}}'s Albums</h3>
+		<!--TODO: Display a carousel component for the artist's albums. Bind carousel's resources and give it a static carouselId.-->
+		<div *ngIf="albums" id="{{albumCarouselId}}" class="carousel slide carousel-fade" data-ride="carousel" data-pause="false" data-interval="3000">
+			<div class="carousel-inner">
+			  <div *ngFor="let resource of albums.items; let i = index" class="carousel-item" [class.active]="i === 0">
+					<a [routerLink]="'/album/' + resource.id" target="">
+						<img [src]="resource.images[1].url" class="d-block w-100">
+						<div class="carousel-caption d-none d-md-block">
+							<h5>{{ resource.name }}</h5>
+						</div>
+						</a>
+				</div>
+			  </div>
+			<a class="carousel-control-prev" href="#{{albumCarouselId}}" role="button" data-slide="prev">
+			  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			  <span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#{{albumCarouselId}}" role="button" data-slide="next">
+			  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			  <span class="sr-only">Next</span>
+			</a>
+		  </div>
+
+	</div>
+	<div class="col-6">
+		<h3>Similar Artists</h3>
+		<!--TODO: Display a carousel component for similar artists. Bind carousel's resources and give it a static carouselId.-->
+		<div *ngIf="relatedArtists" id="{{relatedCarouselId}}" class="carousel slide carousel-fade" data-ride="carousel" data-pause="false" data-interval="3000">
+			<div class="carousel-inner">
+			  <div *ngFor="let resource of relatedArtists.artists; let i = index" class="carousel-item" [class.active]="i === 0">
+					<a [routerLink]="'/artist/' + resource.id" target="">
+						<img [src]="resource.images[1].url" class="d-block w-100">
+						<div class="carousel-caption d-none d-md-block">
+							<h5>{{ resource.name }}</h5>
+						</div>
+						</a>
+				</div>
+			  </div>
+			<a class="carousel-control-prev" href="#{{relatedCarouselId}}" role="button" data-slide="prev">
+			  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			  <span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#{{relatedCarouselId}}" role="button" data-slide="next">
+			  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			  <span class="sr-only">Next</span>
+			</a>
+		  </div>
+	</div>
+
+</div>
