@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "chroma.ts": "^1.0.10"
+  }
+}
